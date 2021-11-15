@@ -1,0 +1,34 @@
+/*	Classe Point
+*	But: 	Créer un point avec une abscisse et une ordonnée, ainsi que ses fonctions de récupération, modification et affichage
+*	Auteur: Stéphane Rolland
+*	Date:	15/11/2021
+*/
+
+classe Point(x:integer, y:integer)
+
+Début
+	fonction getX() -> integer
+	Début
+		return x
+	Fin
+
+	fonction setX(newX:integer)
+	Début
+		x <- newX
+	Fin
+
+	fonction getY() -> integer
+	Début
+		return y
+	Fin
+
+	fonction setY(newY:integer)
+	Début
+		y <- newY
+	Fin
+
+	fonction toString() -> string
+	Début
+		return "Point: x = " + getX() + ", y = " + getY()
+	Fin
+Fin

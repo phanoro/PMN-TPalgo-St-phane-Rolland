@@ -1,0 +1,26 @@
+/*	Programme Circle
+*	But: 	Instancier un cercle avec un point et un rayon, et tester ses fonctions
+*	Auteur: Stéphane Rolland
+*	Date:	15/11/2021
+*/
+
+Début
+	cercle <- new Circle(new Point(6,9), 5)
+	afficher cercle.area()
+
+	//n'appartient pas au cercle
+	Si cercle.containsPoint(new Point(4,2))
+		afficher "Ce point appartient au cercle"
+	Sinon
+		afficher "Ce point n'appartient pas au cercle"
+	FinSi
+
+	//appartient au cercle
+	Si cercle.containsPoint(new Point(5,5))
+		afficher "Ce point appartient au cercle"
+	Sinon
+		afficher "Ce point n'appartient pas au cercle"
+	FinSi
+
+	afficher cercle.toString()
+Fin

@@ -1,0 +1,29 @@
+/*	Classe Circle
+*	But: 	Créer un cercle avec un point et un rayon, une fonction calculant son aire, et une fonction déterminant si un point est dans le cercle
+*		On rappelera la formule:
+*			- calculant l'aire d'un cercle: Pi*rayon²
+*			- d'appartenance à un cercle: (xa-xb)²+(ya-yb)²<rayon²
+*	Auteur: Stéphane Rolland
+*	Date:	15/11/2021
+*/
+
+classe Circle(point:Point, radius:Integer)
+
+Début
+	//Calcule l'aire
+	fonction area() -> float
+	Début
+		return Math.PI * Math.pow(radius,2)
+	Fin
+
+	//Détermine si un point appartient au cercle
+	fonction containsPoint(p:Point) -> boolean
+	Début
+		return Math.pow((point.getX() - p.getX()),2) + Math.pow((point.getY() - p.getY()),2) < Math.pow(radius,2)
+	Fin
+
+	fonction toString() -> string
+	Début
+		return "Cercle de centre " + point.toString + " et de rayon " + radius
+	Fin
+Fin

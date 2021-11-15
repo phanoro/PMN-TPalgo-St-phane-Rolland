@@ -1,0 +1,38 @@
+/*	Classe Hippopotamus
+*	But: 	Créer un hippopotame, le faire manger, nager, se battre
+*	Auteur: Stéphane Rolland
+*	Date:	15/11/2021
+*/
+
+classe Hippopotamus(name:string, weight:integer, tusksSize:float)
+
+Début
+	//fonction nager
+	fonction swim()
+	Début
+		weight <- weight-300
+	Fin
+
+	//fonction manger
+	fonction eat()
+	Début
+		weight <- weight+1000
+	Fin
+
+	//fonction combattre, comparaison de la taille des défenses
+	fonction fight(hippo:Hippopotamus)
+	Début
+		Si tusksSize > hippo.tusksSize
+			afficher name + " gagne"
+		Sinon Si tusksSize < hippo.tusksSize
+			afficher hippo.name + " gagne"
+		Sinon
+			afficher "Match nul"
+		FinSi
+	Fin
+
+	fonction toString() -> string
+	Début
+		return "Je m'appelle " + name + ", je pèse " + weight + "g et mes défenses mesurent " + tusksSize + "m."
+	Fin
+Fin

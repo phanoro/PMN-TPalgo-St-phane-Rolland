@@ -1,0 +1,13 @@
+/*	Programme TestPoint
+*	But: 	Instancier un point avec une abscisse et une ordonnée et tester ses fonctions
+*	Auteur: Stéphane Rolland
+*	Date:	15/11/2021
+*/
+
+Début
+	a <- new Point(4,2)
+	afficher a.toString()
+	a.setX(6)
+	a.setY(9)
+	afficher a.toString()
+Fin
