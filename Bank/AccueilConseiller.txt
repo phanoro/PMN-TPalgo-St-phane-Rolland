@@ -1,0 +1,22 @@
+/*	Programme accueilConseiller
+*	But: 	Proposer un menu au conseiller connecté. Ce dernier peut contacter un utilisateur par écrit
+*	Auteur: Stéphane Rolland
+*	Date:	19/11/2021
+*/
+
+fonction accueilConseiller(conseiller:Conseiller)
+
+option:String
+options:tab[String]
+
+Début
+	option <- ""
+	options <- ["Contacter client", "Quitter"]
+	TQ option != "Quitter"
+		Afficher "Bienvenue sur votre espace conseiller! Que Voulez vous faire?"
+		saisir option parmi options
+		Si option = "Contacter client"
+			conseiller.chat()
+		FinSi
+	FinTQ
+Fin

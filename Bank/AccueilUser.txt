@@ -1,0 +1,36 @@
+/*	Programme accueilUser
+*	But: 	Proposer un menu à l'utilisateur connecté. Ce dernier peut:
+*			- lier un compte bancaire à son compte
+*			- ajouter un contacten renseignant l'IBAN
+*			- transférer de l'argent à un contact
+*			- contacter son conseiller
+*	Auteur: Stéphane Rolland
+*	Date:	16/11/2021
+*/
+
+fonction accueilUser(user:User)
+
+option:String
+options:tab[String]
+
+Début
+	option <- ""
+	options <- [	"Lier Compte",
+			"Ajouter contact",
+			"Transérer argent",
+			"Contacter conseiller",
+			"Quitter"]
+	TQ option != "Quitter"
+		Afficher "Bienvenue sur votre espace utilisateur! Que Voulez vous faire?"
+		saisir option parmi options
+		Si option = "Lier Compte"
+			user.lierCompte()
+		Sinon Si option = "Ajouter contact"
+			user.contactManager()
+		Sinon Si option = "Transérer argent"
+			user.wireTranfert()
+		Sinon Si option = "Contacter conseiller"
+			user.chat()
+		FinSi
+	FinTQ
+Fin

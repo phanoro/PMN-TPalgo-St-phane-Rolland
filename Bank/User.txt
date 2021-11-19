@@ -1,0 +1,95 @@
+/*	Classe User
+*	But: 	Renseigner toutes les informations relatives à un utilisateur
+*	Auteur: Stéphane Rolland
+*	Date:	16/11/2021
+*/
+
+Classe User(donnees[]:any)
+
+id: integer
+nom: String
+prenom: String
+email: String
+iban[]: String
+contact[]: String
+conseiller: Conseiller
+
+Début
+	fonction lierCompte()
+	newIban:String
+	compteExist:Compte
+	Début
+		afficher "ajouter un compte par IBAN"
+		saisir newIban
+
+		//Interroge la BDD sur l'existance du compte bancaire
+		compteExist <- requeteCompte(iban)
+
+		Si estVide(compteExist)
+			afficher "IBAN inconnu"
+		Sinon
+			iban.add(newIban)
+			// On insert l'IBAN du compte
+			inserContact(newIban)
+		FinSi
+	Fin
+
+	fonction contactManager()
+	iban:String
+	compteExist:Compte
+	Début
+		afficher "ajouter un contact bancaire par IBAN"
+		saisir iban
+
+		//Interroge la BDD sur l'existance du compte contact
+		compteExist <- requeteCompte(iban)
+		Si estVide(compteExist)
+			afficher "IBAN inconnu"
+		Sinon
+			contact.add(iban)
+			// On insert l'IBAN du compte
+			inserContact(iban)
+		FinSi
+	Fin
+
+	fonction wireTranfert()
+	ibanBenef:String
+	montant:float
+	compteDeb:Compte 
+	compte:Compte
+	Début
+		afficher "Saisir IBAN bénéficiaire"
+		saisir ibanBenef parmi contact[]
+		afficher "Saisir montant à transférer"
+		saisir montant
+		compteDeb <- requeteCompte(iban)
+		Si compteDeb.debiter(montant)
+			//prends les 2 premiers caractères de l'iban
+			codePays <- ibanBenef.substr(0,2)
+					
+			Si codePays != "FR"
+				//fonction convertissant le montant en fonction du code pays en parametre
+				montant <- convertirMontant(codePays)
+			FinSi
+
+			// Récupère le compte lié à l'IBAN fourni
+			compte <- requeteCompte(ibanBenef)
+			compte.crediter(montant)
+		Sinon
+			afficher "Opération annulée"
+		FinSi
+	Fin
+
+	fonction chat()
+	historique[]:String
+	Début
+		// On récupère le chat correspondant au conseiller attitré à l'utilisateur, dans la BDD
+		historique <- requeteChat(conseiller)
+		chat <- new Chat(this, conseiller, historique)
+		chat.afficher()
+
+		afficher "envoyer un message"
+		saisir message
+		chat.envoyer(nom + " " + prenom + [" + date.now() + "]: " + message)
+	Fin
+Fin

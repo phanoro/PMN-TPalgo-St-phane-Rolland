@@ -1,0 +1,22 @@
+/*	Programme principal de l'application
+*	But: 	Donner la possibilité à l'utilisateur de créer et gérer son compte en banque
+*	Auteur: Stéphane Rolland
+*	Date:	16/11/2021
+*/
+
+option:String
+options:tab[String]
+
+Début
+	option <- ""
+	options <- ["Inscription", "Authentification", "Quitter"]
+	TQ option != "Quitter"
+		afficher "Bienvenue! que souhaitez vous faire?"
+		saisir option parmi options
+		Si option = "inscription"
+			inscription()
+		Sinon Si option = "authentification"
+			authentification()
+		FinSi
+	FinTQ
+Fin
