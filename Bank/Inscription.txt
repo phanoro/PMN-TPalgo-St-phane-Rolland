@@ -1,0 +1,36 @@
+/*	Programme Inscription
+*	But: 	Inscrire un nouvel utilisateur dans l'application
+*	Auteur: Stéphane Rolland
+*	Date:	16/11/2021
+*/
+
+fonction Inscription()
+
+nom:String
+prenom:String
+email:String
+mdp:String
+
+Début
+	afficher "saisir nom, prénom, email et mdp. Confirmez le mdp"
+	saisir nom
+	saisir prenom
+	saisir email
+	saisir mdp
+	saisir mdpConfirm
+	Si mdp = mdpConfirm
+		// Vérifie l'éxistance de l'email dans la base
+		donnees <- requeteUser(email)
+		Si estVide(donnees)
+			// Insert un nouvel utilisateur dans la base de données
+			Si insertUser(nom, prenom, email, mdp)
+				afficher "Inscription réussie!"
+			Sinon
+				afficher "Un problème est survenu lors de l'inscription"
+		Sinon
+			afficher "Cet email existe déjà"
+		FinSi
+	Sinon
+		afficher "Les mdp doivent correspondre"
+	FinSi
+Fin

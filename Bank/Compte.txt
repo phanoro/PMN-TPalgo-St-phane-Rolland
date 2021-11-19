@@ -1,0 +1,33 @@
+/*	Classe Compte
+*	But: 	Créer un compte avec un unique IBAN et pouvoir le gérer
+*	Auteur: Stéphane Rolland
+*	Date:	16/11/2021
+*/
+
+Classe User(iban:String)
+
+montant: float
+
+Début
+	montant <- 0
+	
+	fonction crediter(ajout:float)
+	Début
+		montant <- montant + ajout
+
+		// MAJ de la BDD
+		updateCompte(montant)
+	Fin
+	
+	fonction debiter(retrait:float)
+	Début
+		Si montant - retrait >= 0
+			montant <- montant - retrait
+
+			// MAJ de la BDD
+			updateCompte(montant)
+		Sinon
+			afficher "Compte à découvert, transaction annulée"
+		FinSi
+	Fin
+Fin

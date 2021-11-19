@@ -1,0 +1,50 @@
+/*	Programme Authentification
+*	But: 	
+*	Auteur: Stéphane Rolland
+*	Date:	16/11/2021
+*/
+
+fonction authentification()
+
+email:String
+mdp:String
+codeVerif:String
+verifCode:String
+i:integer
+
+Début
+	i <- 0
+	afficher "saisir email et mdp"
+	saisir email
+	saisir mdp
+
+	// On interroge la base de donnée pour avoir les données utilisateurs
+	donneesUser <- requeteUser(email, mdp)
+	donneesConseiller <- requeteConseiller(email, mdp)
+
+	Si estVide(donneesUser) && estVide(donneesConseiller)
+		afficher "Email ou mdp erroné"
+	Sinon
+		// On crée un code à 6 chiffres sous forme de chaine de caractères que l'on envoie par mail
+		codeVerif <- rand(0,9) + rand(0,9) + rand(0,9) + rand(0,9) + rand(0,9) + rand(0,9)
+		sendMail(codeVerif, email)
+
+		// On laisse 3 essais à l'utilisateur pour rentrer son code de vérification
+		TQ i < 3
+			afficher "Saisissez le code de vérification envoyé par mail"
+			saisir verifCode
+			i <- i + 1
+			Si codeVerif = verifCode
+				afficher "authentification réussie"
+
+				// On détermine la session à ouvrir
+				Si estVide(donneesUser)
+					accueilConseiller(new Conseiller(donneesConseiller))
+				Sinon
+					accueilUser(new User(donneesUser))
+				FinSi
+				i <- 3
+			FinSi
+		FinTQ
+	FinSi
+Fin

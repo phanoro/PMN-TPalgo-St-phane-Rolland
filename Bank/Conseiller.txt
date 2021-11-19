@@ -1,0 +1,30 @@
+/*	Classe Conseiller
+*	But: 	Renseigner toutes les informations relatives à un conseiller
+*	Auteur: Stéphane Rolland
+*	Date:	19/11/2021
+*/
+
+Classe Conseiller(donnees[]:any)
+
+id: integer
+nom: String
+prenom: String
+email: String
+contacts[]: User
+
+Début
+	fonction chat()
+	Début
+		afficher "Qui voulez vous contacter?"
+		saisir contact parmi contacts
+
+		// On récupère le chat correspondant à l'utilisateur sélectionné, dans la BDD
+		historique <- requeteChat(contact)
+		chat <- new Chat(contact, this, historique)
+		chat.afficher()
+
+		afficher "envoyer un message"
+		saisir message
+		chat.envoyer(nom + " " + prenom + [" + date.now() + "]: " + message)
+	Fin
+Fin

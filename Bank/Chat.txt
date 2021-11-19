@@ -1,0 +1,25 @@
+/*	Classe User
+*	But: 	Permettre à 2 personnes de communiquer
+*	Auteur: Stéphane Rolland
+*	Date:	18/11/2021
+*/
+
+Classe Chat(user:User, conseiller:Conseiller, historique[]:String)
+
+
+Début
+	fonction afficher()
+	Début
+		Pour i de 0 à historique.length()
+			afficher historique[i] + ~retour à la ligne~
+		FinPour
+	Fin
+
+	fonction envoyer(message)
+	Début
+		historique.add(message)
+		// On met à jour la base de données
+		insertMessage(message)
+	Fin
+Fin
+
